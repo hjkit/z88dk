@@ -161,27 +161,28 @@ string Args::bin_filename(const string& filename, const string& section) {
 	fs::path file_path, file_ext;
 
 	if (m_bin_file.empty()) {
-		file_path = fs::path(filename);
-		file_ext = fs::path(EXT_BIN);
+		file_path = filename;
+		file_ext = EXT_BIN;
 	}
 	else {
 		// output file may have no extension
-		file_path = fs::path(m_bin_file);
-		file_ext = file_path.extension();
+		file_path = m_bin_file;
+		file_ext = file_path.has_extension() ?
+			file_path.extension() : EXT_BIN;
 	}
 
 	string filename1 = prepend_output_dir(file_path.generic_string());
 	string filename2 = replace_ext(filename1, file_ext.generic_string());
-	file_path = fs::path(filename2);
+	file_path = filename2;
 
 	if (!section.empty()) {
 		// output file with section has .bin extension
 		fs::path new_path;
 		new_path = file_path.parent_path();
 		new_path /= file_path.stem();
-		new_path += fs::path("_");
-		new_path += fs::path(section);
-		new_path += EXT_BIN;
+		new_path += "_";
+		new_path += section;
+		new_path += file_ext;
 		file_path = new_path;
 	}
 

@@ -39,7 +39,7 @@ all: $(EXECFILES) EX8.COM ADVA.COM dstar.cas microman.cas othello.cas wall.cas g
 endif
 
 EX8.COM: ex8.c
-	$(CC) +msx -vn -subtype=msxdos -create-app -oex8 ex8.c -lmsxbios
+	$(CC) +msx -vn -subtype=msxdos -create-app -oex8.bin ex8.c -lmsxbios
 
 ADVA.COM: ../console/adv_a.c
 	$(CC) +msx -vn -subtype=msxdos ../console/adv_a.c -I../console -DCOMPUTE_SCORE -DPICS -DDISK -create-app -clib=ansi -oadva.bin
